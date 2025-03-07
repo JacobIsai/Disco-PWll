@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+body{
+  /* background-image: url("IMGs/BG.png"); */
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.8); 
+    background-blend-mode: darken; 
+
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+.content {
+  flex: 1;
+}
+
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #34373e; 
+    padding: 30px 40px;
+    border-radius: 15px; /* Esquinas redondeadas */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    color: #fff; /* Letras blancas */
+  }
+  
+  .content header,
+  .content .text {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  .content .space {
+    margin: 10px 0;
+  }
+
+  .content input[type="text"],
+.content input[type="password"] {
+  width: 100%;
+  padding: 15px 20px;
+  margin: 10px 0;
+  border: 1px solid #bdc3c7;
+  border-radius: 10px; /* Esquinas redondeadas */
+  background: #ecf0f1;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #2c3e50;
+  box-sizing: border-box;
+  transition: border 0.3s;
+}
+
+.content input[type="text"]:focus,
+.content input[type="password"]:focus {
+  border: 1px solid #3498db; /* Color al hacer focus */
+  outline: none;
+}
+
+.content button {
+  width: 100%;
+  padding: 15px 20px;
+  margin-top: 15px;
+  background: linear-gradient(45deg, #f4746b, #efa66a);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px; /* Esquinas redondeadas */
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.content button:hover {
+background: linear-gradient(45deg, #ffa07a, #ff8000);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  margin: 15px 0;
+}
+
+.input-box input[type="text"],
+.input-box input[type="password"] {
+  width: 100%;
+  padding: 15px 45px 15px 20px; /* Espacio para el ícono a la derecha */
+  border: 1px solid #bdc3c7;
+  border-radius: 10px;
+  background: #ecf0f1;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #2c3e50;
+  box-sizing: border-box;
+  transition: border 0.3s;
+}
+
+.input-box input[type="text"]:focus,
+.input-box input[type="password"]:focus {
+  border: 1px solid #1b1b1b;
+  outline: none;
+}
+
+.input-box .fas {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #1b1b1b; /* Color negro para los íconos */
+  font-size: 20px;
+  /* pointer-events: none; Para que el ícono no interfiera al hacer clic en el input */
+
+}
+
+
+
+.forgot-link {
+  text-align: center;
+  margin-top: 20px; /* Espacio entre el botón y el texto */
+}
+
+.forgot-link a {
+  color: #ffffff;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+
+.page-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.search-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px; /* Más espacio debajo */
+}
+
+.search-box {
+    display: flex;
+    width: 50%;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 10px 0 0 10px;
+    font-size: 16px;
+}
+
+.search-box button {
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    background: #f4746b;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 10px 10px 0;
+}
+
+.post {
+    display: flex;
+    align-items: flex-start;
+    background: #2c2f35;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    gap: 15px;
+}
+
+.posts-section {
+    width: 90%; /* Antes era 80% */
+    max-width: 900px; /* Ahora más grande */
+    background: #1f2227;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.posts-section h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 60px; /* Más grande */
+    height: 60px;
+    border-radius: 50%;
+}
+
+
+.post-content {
+    color: white;
+    flex-grow: 1; /* Para expandirse */
+    max-width: 100%;
+}
+
+.post-image {
+    width: 100%; /* Ahora más ancha */
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0; /* Asegura que esté en la parte superior */
+    left: 0; /* Asegura que esté en el borde izquierdo */
+    width: 90px; /* Ancho cuando está colapsado */
+    height: 100vh;
+    background-color: #202124;
+    /* padding: 20px; */
+    padding: 40px 20px;
+    /* margin: 40px 0; */
+    margin: 10px 0 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border-radius: 0 50px 50px 0; */
+    border-radius: 30px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+    z-index: 1000;
+    
+}
+
+.sidebar:hover {
+    width: 250px; /* Se expande al hacer hover */
+    
+    top: 0;
+}
+
+.sidebar h2 {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 1ch; /* Solo deja un caracter visible */
+    transition: width 0.3s ease-in-out;
+}
+
+.sidebar:hover h2 {
+    width: auto; /* Se expande con el hover */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.sidebar ul li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: justify-content 0.3s ease-in-out;
+}
+
+.sidebar:hover ul li {
+    justify-content: flex-start;
+    
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar ul li a span {
+    
+    transition: opacity 0.4s ease-in-out;
+} 
+
+.sidebar:hover ul li a span {
+    display: inline;
+    opacity: 1;
+}
+
+/* Ocultar el texto completamente cuando la barra está colapsada */
+.sidebar h2,
+.sidebar ul li a span {
+    visibility: hidden; /* No se verá el texto */
+    opacity: 0; /* Asegurarse de que el texto no sea visible */
+    width: 0; /* Asegura que no ocupe espacio */
+    transition: visibility 0s, opacity 0.4s ease-in-out, width 0.4s ease-in-out;
+}
+
+/* Mostrar el texto cuando la barra lateral se expanda */
+.sidebar:hover h2,
+.sidebar:hover ul li a span {
+    visibility: visible;
+    opacity: 1;
+    width: auto; /* Hace que el texto se expanda completamente */
+}
+
+.sidebar ul li a i {
+    background: linear-gradient(45deg, #f4746b, #efa66a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.sidebar ul li a:hover i {
+    color: white; /* Los íconos se vuelven blancos cuando se pasa el ratón sobre el botón */
+    background: transparent; /* Elimina el degradado solo al pasar el ratón sobre el botón */
+}
+
+
+.sidebar ul li a span {
+    color: white; /* El texto siempre será blanco */
+    opacity: 0; /* Los textos están ocultos por defecto */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar:hover ul li a span {
+    opacity: 1; /* Los textos se muestran cuando se expande el nav */
+}
+
+
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+li {
+    margin: 15px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+    border-radius: 30px;
+    transition: background 0.3s;
+    box-sizing: border-box; /* Evita que el padding afecte el ancho total */
+    overflow: hidden; /* Evita que el hover sobresalga */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+}
+
+a i {
+    margin-right: 10px;
+}
+
+a:hover {
+    background: linear-gradient(90deg, #f4746b, #efa66a); 
+    width: 100%;
+    box-shadow: 5px 0 15px rgba(244, 116, 107, 0.5);
+
+}
+
+
+
+.footer {
+  background: #202124;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+}
