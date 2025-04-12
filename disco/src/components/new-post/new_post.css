@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+  }
+body{
+    /*background-image: url("../assets/BG.png"); */
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.8); /* Negro con 50% de transparencia */
+    background-blend-mode: darken; /* Mezcla el negro con la imagen */
+
+}
+
+.content {
+  flex: 1;
+}
+
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 40px 20px; /* Padding opcional */
+  min-height: 100vh;
+}
+
+/* Modifica esto */
+.content {
+  background: #34373e;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 95%;
+  max-width: 600px;
+  color: #fff;
+  position: relative; /* Ya no es absolute */
+}
+
+.content h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+  
+  .content header,
+  .content .text {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  .content .space {
+    margin: 10px 0;
+  }
+
+  .content input[type="text"],
+.content input[type="password"] {
+  width: 100%;
+  padding: 15px 20px;
+  margin: 10px 0;
+  border: 1px solid #bdc3c7;
+  border-radius: 10px; /* Esquinas redondeadas */
+  background: #ecf0f1;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #2c3e50;
+  box-sizing: border-box;
+  transition: border 0.3s;
+}
+
+.content input[type="text"]:focus,
+.content input[type="password"]:focus {
+  border: 1px solid #3498db; /* Color al hacer focus */
+  outline: none;
+}
+
+.content textarea {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    border: 1px solid #bdc3c7;
+    border-radius: 10px;
+    background: #ecf0f1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #2c3e50;
+    resize: none;
+}
+
+.media-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.upload-btn {
+    background: linear-gradient(45deg, #5eafdb, #4578b9);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.upload-btn:hover {
+    background: linear-gradient(45deg, #7ad0ff, #0059ff);
+}
+
+.publish-btn {
+    background: linear-gradient(45deg, #f4746b, #efa66a);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.publish-btn:hover {
+    background: linear-gradient(45deg, #ffa07a, #ff8000);
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  margin: 15px 0;
+}
+
+.input-box input[type="text"],
+.input-box input[type="password"] {
+  width: 100%;
+  padding: 15px 45px 15px 20px; /* Espacio para el ícono a la derecha */
+  border: 1px solid #bdc3c7;
+  border-radius: 10px;
+  background: #ecf0f1;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #2c3e50;
+  box-sizing: border-box;
+  transition: border 0.3s;
+}
+
+.input-box input[type="text"]:focus,
+.input-box input[type="password"]:focus {
+  border: 1px solid #1b1b1b;
+  outline: none;
+}
+
+.input-box .fas {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #1b1b1b; /* Color negro para los íconos */
+  font-size: 20px;
+  /* pointer-events: none; Para que el ícono no interfiera al hacer clic en el input */
+
+}
+
+.input-box textarea {
+    width: 100%;
+    height: 150px;
+    padding: 20px;
+    font-size: 18px;
+    border: 2px solid #bdc3c7;
+    border-radius: 15px;
+    background: #ecf0f1;
+    color: #2c3e50;
+    resize: none;
+}
+
+.input-box textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.forgot-link {
+  text-align: center;
+  margin-top: 20px; /* Espacio entre el botón y el texto */
+}
+
+.forgot-link a {
+  color: #ffffff;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+
+
+
+.sidebar {
+    position: fixed;
+    top: 0; /* Asegura que esté en la parte superior */
+    left: 0; /* Asegura que esté en el borde izquierdo */
+    width: 90px; /* Ancho cuando está colapsado */
+    height: 100vh;
+    background-color: #202124;
+    /* padding: 20px; */
+    padding: 40px 20px;
+    /* margin: 40px 0; */
+    margin: 10px 0 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border-radius: 0 50px 50px 0; */
+    border-radius: 30px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+    z-index: 1000;
+    
+}
+
+.sidebar:hover {
+    width: 250px; /* Se expande al hacer hover */
+    
+    top: 0;
+}
+
+.sidebar h2 {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 1ch; /* Solo deja un caracter visible */
+    transition: width 0.3s ease-in-out;
+}
+
+.sidebar:hover h2 {
+    width: auto; /* Se expande con el hover */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.sidebar ul li {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: justify-content 0.3s ease-in-out;
+}
+
+.sidebar:hover ul li {
+    justify-content: flex-start;
+    
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar ul li a span {
+    
+    transition: opacity 0.4s ease-in-out;
+} 
+
+.sidebar:hover ul li a span {
+    display: inline;
+    opacity: 1;
+}
+
+/* Ocultar el texto completamente cuando la barra está colapsada */
+.sidebar h2,
+.sidebar ul li a span {
+    visibility: hidden; /* No se verá el texto */
+    opacity: 0; /* Asegurarse de que el texto no sea visible */
+    width: 0; /* Asegura que no ocupe espacio */
+    transition: visibility 0s, opacity 0.4s ease-in-out, width 0.4s ease-in-out;
+}
+
+/* Mostrar el texto cuando la barra lateral se expanda */
+.sidebar:hover h2,
+.sidebar:hover ul li a span {
+    visibility: visible;
+    opacity: 1;
+    width: auto; /* Hace que el texto se expanda completamente */
+}
+
+.sidebar ul li a i {
+    background: linear-gradient(45deg, #f4746b, #efa66a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.sidebar ul li a:hover i {
+    color: white; /* Los íconos se vuelven blancos cuando se pasa el ratón sobre el botón */
+    background: transparent; /* Elimina el degradado solo al pasar el ratón sobre el botón */
+}
+
+
+.sidebar ul li a span {
+    color: white; /* El texto siempre será blanco */
+    opacity: 0; /* Los textos están ocultos por defecto */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar:hover ul li a span {
+    opacity: 1; /* Los textos se muestran cuando se expande el nav */
+}
+
+
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    transition: opacity 0.3s ease-in-out;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+li {
+    margin: 15px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+    border-radius: 30px;
+    transition: background 0.3s;
+    box-sizing: border-box; /* Evita que el padding afecte el ancho total */
+    overflow: hidden; /* Evita que el hover sobresalga */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+}
+
+a i {
+    margin-right: 10px;
+}
+
+a:hover {
+    background: linear-gradient(90deg, #f4746b, #efa66a); 
+    width: 100%;
+    box-shadow: 5px 0 15px rgba(244, 116, 107, 0.5);
+
+}
+
+
+
+.footer {
+  background: #202124;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+}

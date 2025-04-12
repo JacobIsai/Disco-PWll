@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import Registro from './components/registro/registro';
 import Home from './components/home/home'; 
+import Configuracion from './components/configuration/configuration';
+import NuevaPublicacion from './components/new-post/new_post';
+import Dms from './components/dms/dms';
+// import Perfil from './components/perfil/perfil';
+
+
 import { auth } from './lib/firebase'; 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import './iniciar_sesion.css';
@@ -86,6 +92,13 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/home" element={user ? <Home /> : <Login />} />
+          <Route path="/configuration" element={<Configuracion />} />
+          <Route path="/new-post" element={<NuevaPublicacion />} />
+          <Route path="/mensajes" element={<Dms />} />
+          {/* <Route path="/perfil" element={<RedSocial />} /> */}
+
+          
+
         </Routes>
       </div>
     </Router>
