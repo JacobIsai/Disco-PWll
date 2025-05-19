@@ -5,12 +5,13 @@ import Home from './components/home/home';
 import Configuracion from './components/configuration/configuration';
 import NuevaPublicacion from './components/new-post/new_post';
 import Dms from './components/dms/dms';
-// import Perfil from './components/perfil/perfil';
-
-
-import { auth } from './lib/firebase'; 
+import Perfil from './components/perfil/perfil';
+import PostDetail from './components/verpublicacion/PostDetail';
+import { auth } from './lib/firebase';
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import './iniciar_sesion.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faUser, faCog, faHeadphones } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -28,10 +29,10 @@ const Login = () => {
   };
 
   return (
-    <div className="content">
+    <div className="login-content">
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleLogin}>
-        <div className="input-box">
+        <div className="login-input-box">
           <span className="fas fa-user"></span>
           <input 
             type="email" 
@@ -41,7 +42,7 @@ const Login = () => {
             required 
           />
         </div>
-        <div className="input-box">
+        <div className="login-input-box">
           <span className="fas fa-lock"></span>
           <input 
             type="password" 
@@ -70,20 +71,20 @@ const App = () => {
 
   return (
     <Router>
-      <div>
-        <nav className="sidebar">
-          <h2 className="logo">
-            <i className="fas fa-headphones"></i> <span>Disco</span>
+      <div className="app-body">
+        <nav className="app-sidebar">
+          <h2 className="app-logo">
+            <FontAwesomeIcon icon={faHeadphones} /> <span>Disco</span>
           </h2>
           <ul>
             <li>
-              <a href="/"> <i className="fas fa-home"></i> <span>Inicio</span> </a>
+              <a href="/"><FontAwesomeIcon icon={faHome} /> <span>Inicio</span></a>
             </li>
             <li>
-              <a href="/registro"> <i className="fas fa-user"></i> <span>CrearCuenta</span> </a>
+              <a href="/registro"><FontAwesomeIcon icon={faUser} /> <span>CrearCuenta</span></a>
             </li>
             <li>
-              <a href="/registro"> <i className="fas fa-cog"></i> <span>Configuración</span> </a>
+              <a href="/registro"><FontAwesomeIcon icon={faCog} /> <span>Configuración</span></a>
             </li>
           </ul>
         </nav>
@@ -95,10 +96,8 @@ const App = () => {
           <Route path="/configuration" element={<Configuracion />} />
           <Route path="/new-post" element={<NuevaPublicacion />} />
           <Route path="/mensajes" element={<Dms />} />
-          {/* <Route path="/perfil" element={<RedSocial />} /> */}
-
-          
-
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/post/:postId" element={<PostDetail />} />
         </Routes>
       </div>
     </Router>

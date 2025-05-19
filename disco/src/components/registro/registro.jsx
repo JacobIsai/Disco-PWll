@@ -1,81 +1,139 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './registro.css';
-import { Link, useNavigate } from 'react-router-dom'; 
-import { db } from '../../lib/firebase'; 
-import { collection, addDoc } from 'firebase/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth';  // Importa la función de registro de Firebase
-import { auth } from '../../lib/firebase';  // Asegúrate de tener la configuración de Firebase aquí
+import { Link, useNavigate } from 'react-router-dom';
+import { doc, setDoc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../../lib/firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faHome, 
+  faUser, 
+  faCog, 
+  faHeadphones, 
+  faMailBulk, 
+  faLock 
+} from '@fortawesome/free-solid-svg-icons';
 
 const NuevoUsuario = () => {
   const [profileImage, setProfileImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();  // Para redirigir a la página de inicio después del registro
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
+  // Previsualizar imagen seleccionada
   const previewImage = (event) => {
     const file = event.target.files[0];
-    if (file) {
+    if (file && file.type.match('image.*')) {
+      setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfileImage(reader.result);
       };
       reader.readAsDataURL(file);
+    } else {
+      alert('Por favor, selecciona un archivo de imagen válido.');
     }
   };
 
+  // Subir imagen a Cloudinary
+  const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'disco_preset'); 
+
+    try {
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/dsvj7sufo/image/upload`, // Reemplaza con tu cloud name
+        formData
+      );
+      return response.data.secure_url;
+    } catch (error) {
+      console.error('Error al subir la imagen:', error);
+      throw error;
+    }
+  };
+
+  // Manejar el registro
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Primero creamos el usuario en Firebase Authentication
-    try {
-      // Registro de usuario en Firebase Authentication
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;  // Obtienes el usuario recién creado
+    setIsLoading(true);
 
-      // Crear un nuevo documento en la colección "usuarios" en Firestore
-      await addDoc(collection(db, 'user'), {
+    try {
+      // 1. Subir imagen si existe
+      let imageUrl = null;
+      if (imageFile) {
+        imageUrl = await uploadImageToCloudinary(imageFile);
+      }
+
+      // 2. Crear usuario en Firebase Auth
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // 3. Guardar datos en Firestore
+      await setDoc(doc(db, 'users', user.uid), {
         name,
         email,
         username,
-        profileImage,
-        uid: user.uid, // Agrega el UID de Firebase Authentication para asociar el usuario con el documento
+        profileImage: imageUrl || null,
+        uid: user.uid,
+        createdAt: new Date()
       });
 
-      console.log('Usuario agregado correctamente');
-      alert('Usuario registrado con éxito');
-      navigate('/home');  // Redirige a la página principal (Home) después del registro
-    } catch (e) {
-      console.error('Error al registrar el usuario: ', e);
-      alert('Error al registrar el usuario: ' + e.message);
+      alert('¡Registro exitoso!');
+      navigate('/home');
+    } catch (error) {
+      let errorMessage = 'Error en el registro: ';
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          errorMessage += 'El correo ya está registrado.';
+          break;
+        case 'auth/weak-password':
+          errorMessage += 'La contraseña debe tener al menos 6 caracteres.';
+          break;
+        default:
+          errorMessage += error.message;
+      }
+      alert(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div>
-      <nav className="sidebar">
-        <h2 className="logo">
-          <i className="fas fa-headphones"></i> <span>Disco</span>
+    <div className="register-body">
+      <nav className="app-sidebar">
+        <h2 className="app-logo">
+          <FontAwesomeIcon icon={faHeadphones} /> <span>Disco</span>
         </h2>
         <ul>
-          <li><Link to="/"> {/* Regresar a la página principal */} 
-            <i className="fas fa-home"></i> <span>Inicio</span>
-          </Link></li>
-          <li><Link to="/registro"> {/* Crear Cuenta */} 
-            <i className="fas fa-user"></i> <span>CrearCuenta</span>
-          </Link></li>
-          <li><Link to="#"> {/* Configuración link */} 
-            <i className="fas fa-cog"></i> <span>Configuración</span>
-          </Link></li>
+          <li>
+            <Link to="/">
+              <FontAwesomeIcon icon={faHome} /> <span>Inicio</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/registro">
+              <FontAwesomeIcon icon={faUser} /> <span>CrearCuenta</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="#">
+              <FontAwesomeIcon icon={faCog} /> <span>Configuración</span>
+            </Link>
+          </li>
         </ul>
       </nav>
 
-      <div className="content">
+      <div className="register-content">
         <h2>Nuevo Usuario</h2>
         <form onSubmit={handleSubmit}>
-          <div className="input-box">
-            <span className="fas fa-user"></span>
+          <div className="register-input-box">
+            <FontAwesomeIcon icon={faUser} className="fas" />
             <input 
               type="text" 
               placeholder="Nombre Completo" 
@@ -84,8 +142,8 @@ const NuevoUsuario = () => {
               required 
             />
           </div>
-          <div className="input-box">
-            <span className="fas fa-mail-bulk"></span>
+          <div className="register-input-box">
+            <FontAwesomeIcon icon={faMailBulk} className="fas" />
             <input 
               type="email" 
               placeholder="Correo" 
@@ -94,8 +152,8 @@ const NuevoUsuario = () => {
               required 
             />
           </div>
-          <div className="input-box">
-            <span className="fas fa-user"></span>
+          <div className="register-input-box">
+            <FontAwesomeIcon icon={faUser} className="fas" />
             <input 
               type="text" 
               placeholder="Usuario" 
@@ -104,23 +162,41 @@ const NuevoUsuario = () => {
               required 
             />
           </div>
-          <div className="input-box">
-            <span className="fas fa-lock"></span>
+          <div className="register-input-box">
+            <FontAwesomeIcon icon={faLock} className="fas" />
             <input 
               type="password" 
               placeholder="Contraseña" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
               required 
+              minLength="6"
             />
           </div>
-          <div className="profile-section">
-            <input type="file" id="profile-pic" accept="image/*" onChange={previewImage} />
-            {/* <div className="profile-preview">
-              {profileImage && <img id="profile-img" src={profileImage} alt="Vista previa" />}
-            </div> */}
+          
+          <div className="register-profile-section">
+            <label htmlFor="profile-pic" className="register-upload-btn">
+              {profileImage ? 'Cambiar imagen' : 'Seleccionar imagen de perfil'}
+            </label>
+            <input 
+              type="file" 
+              id="profile-pic" 
+              accept="image/*" 
+              onChange={previewImage} 
+              style={{ display: 'none' }} 
+            />
+            {profileImage && (
+              <img 
+                src={profileImage} 
+                alt="Vista previa" 
+                className="register-profile-preview"
+              />
+            )}
           </div>
-          <button type="submit" className="login-btn">Ingresar</button>
+          
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Registrando...' : 'Registrarse'}
+          </button>
         </form>
       </div>
     </div>
