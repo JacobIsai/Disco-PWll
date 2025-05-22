@@ -237,3 +237,89 @@
   margin: 0;
   font-size: 14px;
 }
+
+
+
+.dms-combo-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.dms-select {
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.dms-add-button {
+  padding: 5px 10px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #f4746b, #efa66a);
+}
+
+.dms-add-button:hover {
+background: linear-gradient(90deg, #b2534c, #9a6a43);
+}
+
+
+
+.dms-message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  max-width: 100%;
+}
+
+.dms-message-left {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.dms-message-right {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  margin-left: auto;
+}
+
+.dms-msg-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 8px;
+}
+
+.dms-msg-content {
+  background-color: #f0f0f0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  max-width: 60%;
+  word-wrap: break-word;
+}
+
+.dms-message-right .dms-msg-content {
+  background-color: #dcf8c6;
+}
+
+.dms-message-sender {
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.dms-message-text {
+  margin: 4px 0;
+}
+
+.dms-message-date {
+  font-size: 0.75em;
+  color: #ffffff;
+  text-align: right;
+  display: block;
+  margin-top: 4px;
+}
